@@ -3,8 +3,10 @@ import { useState } from 'react'
 import axios from 'axios';
 
 function App() {
+  const server = process.env.REACT_APP_SERVER;
 
   const [file, setfile] = useState(null)
+  const [upload, setupload] = useState(false)
 
   const onFileChange = (e) => {
     // console.log(e.target.files[0]);
@@ -13,20 +15,23 @@ function App() {
 
   const uploadit = (e) => {
     e.preventDefault();
-    console.log("Uploading >>> ", file);
+    setupload(true);
+    // console.log("Uploading >>> ", file);
     const formData = new FormData();
     formData.append(
       'file',
       file)
-    console.log(formData);
-    axios.post('http://localhost:5000/upload', formData).then(response => console.log(response));
+    // console.log(formData);
+    axios.post(`${server}`, formData).then(response =>
+      setupload(false)
+    )
   }
 
   return (
     <div className="App">
       <>
         <input type='file' name='myfile' onChange={onFileChange} />
-        <button onClick={uploadit}>Upload</button>
+        <button disabled={upload} onClick={uploadit}>Upload</button>
       </>
     </div>
   );
