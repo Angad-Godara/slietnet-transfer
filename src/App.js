@@ -11,7 +11,8 @@ function App() {
     setfile(e.target.files[0]);
   }
 
-  const uploadit = () => {
+  const uploadit = (e) => {
+    e.preventDefault();
     console.log("Uploading >>> ", file);
     const formData = new FormData();
     formData.append(

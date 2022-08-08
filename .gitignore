@@ -2,6 +2,8 @@
 
 # dependencies
 /Backend/node_modules
+/Backend/nodemon.json
+/public/uploads
 /node_modules
 /.pnp
 .pnp.js
